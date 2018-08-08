@@ -1,20 +1,20 @@
   //칼을 봅니다
 
   function karl(){
-    var dict1 = "\"	잘못된 겹따옴표입니다. 끝이 뾰족한 겹따옴표(“”)를 써주세요.\
+    var dict1 = "\&quot\;	잘못된 겹따옴표입니다. 끝이 뾰족한 겹따옴표(“”)를 써주세요.\
     '	잘못된 홑따옴표입니다. 끝이 뾰족한 홑따옴표(‘’)를 써주세요.\
     \n’	홑따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
     ‘\n	홑따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
-     ’	홑따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
-    ‘ 	홑따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
+    \&nbsp\;’	홑따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
+    ‘\&nbsp\;	홑따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
     \n”	겹따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
     “\n	겹따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
-     ”	겹따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
-    “ 	겹따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
-      	띄어쓰기를 두 번 했습니다. 조판할 때 실수로 이어질 수 있으니 지워주세요.\
-    \n 	띄어쓰기로 들여쓰기를 하지는 않았나요? 조판할 때 실수로 이어질 수 있으니 지워주세요.\
-    · 	가운뎃점을 뒷말과 붙여쓰십시오.\
-     ·	가운뎃점을 앞말과 붙여쓰십시오.\
+    \&nbsp\;”	겹따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
+    “\&nbsp\;	겹따옴표가 뒤집혔습니다. 올바르게 고쳐주세요.\
+    \&nbsp\;\&nbsp\;	띄어쓰기를 두 번 했습니다. 조판할 때 실수로 이어질 수 있으니 지워주세요.\
+    \n\&nbsp\;	띄어쓰기로 들여쓰기를 하지는 않았나요? 조판할 때 실수로 이어질 수 있으니 지워주세요.\
+    ·\&nbsp\;	가운뎃점을 뒷말과 붙여쓰십시오.\
+    \&nbsp\;·	가운뎃점을 앞말과 붙여쓰십시오.\
     하여 	어미 '~하여'는 '~해'로 줄여 씁니다.\
     하였	어미 '~하였'은 '~했'으로 줄여 씁니다.\
     히어	어미 '~히어'는 '~혀'로 줄여 씁니다.\
@@ -52,8 +52,8 @@
     화학생물공학과	2018년도 1학기 기준 '화학생물공학부'가 옳습니다.\
     화학·생물공학	2018년도 1학기 기준 가운뎃점 없이 '화학생물공학부'가 옳습니다.\
     컴퓨터공학과	2018년도 1학기 기준 '컴퓨터공학부'가 옳습니다.\
-     대학신문은	대학신문에서 대학신문을 지칭할 때는 겹낫표를 사용해 『대학신문』으로 씁니다.\
-     대학신문이	대학신문에서 대학신문을 지칭할 때는 겹낫표를 사용해 『대학신문』으로 씁니다.\
+    \&nbsp\;대학신문은	대학신문에서 대학신문을 지칭할 때는 겹낫표를 사용해 『대학신문』으로 씁니다.\
+    \&nbsp\;대학신문이	대학신문에서 대학신문을 지칭할 때는 겹낫표를 사용해 『대학신문』으로 씁니다.\
     ‘대학신문’	대학신문에서 대학신문을 지칭할 때는 겹낫표를 사용해 『대학신문』으로 씁니다.\
     총장 선출	제62대 취재부장은 '총장 선출'을 붙여쓰기로 통일했습니다.\
     구성 비율	제62대 취재부장은 '구성 비율'을 붙여쓰기로 통일했습니다.\
@@ -64,25 +64,28 @@
     대학본부	'본부'로 씁니다.\
     대학 본부	'본부'로 씁니다.\
     가운뎃점	가운뎃점 찾기가 귀찮았다면 여기 드리겠습니다. '·'\
-    가운데점	가운뎃점 찾기가 귀찮았다면 여기 드리겠습니다. '·'\
-    ";
+    가운데점	가운뎃점 찾기가 귀찮았다면 여기 드리겠습니다. '·'";
 		var article = document.getElementById("article").value;
+    article = article.replace(/ /g, "&nbsp;");
+    article = article.replace(/"/g, "&quot;");
     //탭 두번을 기준으로 나눈 행렬
     var wordArray = dict1.split('\
     ');
     var result='';
     var hltd = article;
+
     for(var inx in wordArray){
       //탭으로 금칙어와 메시지를 나눔
       var thisWord = wordArray[inx].split('\t');
       //금칙어에서 특수문자 이스케이프
       var wrdFrbd = thisWord[0].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       //금칙어를 정규표현식으로
-      var wrdSrch = new RegExp(wrdFrbd,"gi");
+      var wrdSrch = new RegExp(wrdFrbd,"g");
       //메시지
       var errMsg = thisWord[1];
+      //결과출력에서 붉은줄로 표현
+      hltd = hltd.replace(wrdSrch,'<b title ="'+errMsg+'" style ="background-color:red; text-decoration: underline">'+thisWord[0]+'</b>');
       //정규표현식으로 검색한 결과 행렬
-      hltd = hltd.replace(thisWord[0],'<b title ="'+errMsg+'" style ="background-color:red; text-decoration: underline">'+thisWord[0]+'</b>');
       searchArray = article.match(wrdSrch);
       //메시지 출력
       for(var x in searchArray) {
@@ -90,7 +93,6 @@
           result += (thisWord[0]+" : " +errMsg+ '<br>');
       }
     }
-    alert(hltd);
     hltd = hltd.replace(/(\n|\r\n)/g, '<br>');
     document.getElementById("hltd").innerHTML = hltd;
 		document.getElementById("output").innerHTML = result;
