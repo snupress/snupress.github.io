@@ -28,7 +28,7 @@
       //정규표현식으로 검색한 결과 행렬
       searchArray = article.match(wrdSrch);
       //결과출력에서 붉은줄로 표현
-      article = article.replace(wrdSrch,'<b title ="'+errMsg+'" style ="background-color:red; text-decoration: underline">'+thisWord[0]+'</b>');
+      article = article.replace(wrdSrch,'<b title ="'+errMsg+'" style ="background-color:/*#F26968*/red; text-decoration: underline">'+thisWord[0]+'</b>');
       //메시지 출력
       for(var x in searchArray) {
         if(errMsg != undefined)

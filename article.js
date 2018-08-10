@@ -14,11 +14,12 @@
   //칼을 봅니다
   function karl(){
     //변수 초기화
-  	article = getArticle();
+  	article = '<b title="틀린 이유가 나옵니다.">틀린 부분 위에 마우스를 올려놓으세요.<br><br></b>'+getArticle();
     errorConsole='';
     //기능 1//
     func1();
 
+    func3();
     document.getElementById("hltd").innerHTML = article;
 		document.getElementById("output").innerHTML = errorConsole;
 	}
