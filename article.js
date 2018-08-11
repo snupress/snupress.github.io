@@ -46,7 +46,6 @@
     func3();
     document.getElementById("output").innerHTML = article;
 		document.getElementById("errorConsole").innerHTML = errorConsole;
-    console.log(article);
 	}
   //글상자 내용을 지웁니다
   function deleteText(){

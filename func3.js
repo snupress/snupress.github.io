@@ -11,7 +11,7 @@ function func3(){
   var arrayDateWithDay = article.match(regExpDateWithDay);
   if(arrayDateWithDay!=null){
     if(arrayDateWithDay.length >1){
-      updateOutput(article,regExpDateWithDay,"이번 달의 요일만 적어야 합니다.","green")
+      updateOutput(article,regExpDateWithDay,"요일을 한 번만 적어야 합니다.","green")
     }
   }
 }
