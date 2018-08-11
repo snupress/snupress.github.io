@@ -6,6 +6,14 @@
     return article;
   }
 
+//결과값과 에러 콘솔을 업데이트합니다.
+  function updateOutput(text,searchWord,msg,color){
+    var searchArray = text.match(searchWord);
+    article = text.replace(searchWord,function(x){return '<b title =\"'+msg+'\" style ="background-color:'+color+'; text-decoration: underline">'+x+'</b>';});
+    for(var x in searchArray) {
+        errorConsole += (searchArray[x]+' : '+msg+'<br>');
+    }
+  }
   //금칙어를 정규표현식으로 바꿉니다
     function wordToRegExp(str){
       //금칙어에서 특수문자 이스케이프
@@ -32,11 +40,13 @@
     //변수 초기화
   	article = '<b title="틀린 이유가 나옵니다.">틀린 부분 위에 마우스를 올려놓으세요.<br><br></b>'+getArticle();
     errorConsole='';
+    article = article.replace(/(\n|\r\n)/g, '<br>');
     func1();
     func2();
     func3();
     document.getElementById("output").innerHTML = article;
 		document.getElementById("errorConsole").innerHTML = errorConsole;
+    console.log(article);
 	}
   //글상자 내용을 지웁니다
   function deleteText(){

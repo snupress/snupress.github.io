@@ -1,3 +1,4 @@
+
 function func2(){
   var wordArray = dict2.split('    ');
 
@@ -17,31 +18,30 @@ function func2(){
     var splittedByAbbr = thisWord[0].split(thisWord[1]);
 
     var abbrStr = thisWord[1];
+    //축약어가 원래 단어에 포함되고, 원래 단어 속 축약어 앞에 글자가 있는 경우
     if(!!splittedByAbbr[0]&&(splittedByAbbr[1]!=undefined)){
       abbrStr = "(?<!"+splittedByAbbr[0]+")"+abbrStr;
     }
+    //축약어가 원래 단어에 포함되고, 원래 단어 속 축약어 뒤에 글자가 있는 경우
     if(!!splittedByAbbr[1]){
       abbrStr += ("(?!"+splittedByAbbr[1]+")");
     }
+    //뒤에 괄호가 오는 경우
     abbrStr+="(?=[^\\)])";
+
     var abbr = new RegExp(abbrStr,"g");
     var arrayAbbr = article.match(abbr);
     if(arrayAbbrFst != null){
+      //축약을 두 번 한 경우
       if(arrayAbbrFst.length >1){
-        //축약을 두 번 한 경우
-        article = article.replace(abbrFst,function(x){return '<b title ="축약은 한 번씩만 이뤄져야 합니다." style ="background-color:blue; text-decoration: underline">'+x+'</b>';});
-        for(var x in arrayAbbrFst) {
-            errorConsole += (arrayAbbrFst[x]+' : 축약은 한 번씩만 이뤄져야 합니다.<br>');
-        }
+        updateOutput(article,abbrFst,"축약은 한 번씩만 이뤄져야 합니다.","blue")
       }
       //축약을 했는데 비축약어를 쓴 경우
       if(arrayNotAbbr!=null){
-        article = article.replace(notAbbr,function(x){return '<b title ="축약을 했다면 줄임말만 사용해야 합니다." style ="background-color:blue; text-decoration: underline">'+x+'</b>';});
-        for(var x in arrayNotAbbr) {
-            errorConsole += (arrayNotAbbr[x]+' : 축약을 했다면 줄임말만 사용해야 합니다.<br>');
-        }
+        updateOutput(article,notAbbr,"축약을 했다면 줄임말만 사용해야 합니다.","blue")
       }
       //축약을 하기 전에 축약어를 쓴 경우
+      //축약한 곳을 기준으로 기사를 앞뒤로 나눠 앞을 처리한 뒤 다시 합친다
       if(arrayAbbr!=null){
         var tabbrFst = new RegExp("(‘?)"+thisWord[0]+"(’?)\\("+thisWord[1]+"\\)");
         var tarrayAbbrFst = article.match(tabbrFst);
@@ -50,36 +50,17 @@ function func2(){
         if(tarrayAbbr.index<tarrayAbbrFst.index){
           var errorText = article.split(arrayAbbrFst[0]);
           errorArrayAbbr = errorText[0].match(abbr);
-          article = errorText[0].replace(abbr,function(x){return '<b title ="축약을 하기 전에 줄임말을 사용하면 안 됩니다." style ="background-color:blue; text-decoration: underline">'+x+'</b>';})+arrayAbbrFst[0] + errorText[1];
-          article = article.replace(abbrFst,function(x){return '<b title ="축약을 하기 전에 줄임말을 사용하면 안 됩니다." style ="background-color:blue; text-decoration: underline">'+x+'</b>';});
-          for(var x in errorArrayAbbr) {
-              errorConsole += (arrayAbbr[x]+' : 축약을 하기 전에 줄임말을 사용하면 안 됩니다.<br>');
-          }
-          errorConsole += (arrayAbbrFst[0]+' : 축약을 하기 전에 줄임말을 사용하면 안 됩니다.<br>');
+          updateOutput(errorText[0],abbr,"축약을 하기 전에 줄임말을 사용하면 안 됩니다.","blue");
+          article += (arrayAbbrFst[0] + errorText[1]);
+          updateOutput(article,abbrFst,"축약을 하기 전에 줄임말을 사용하면 안 됩니다.","blue");
         }
       }
     }
     //축약을 하지 않은 경우
     else{
       if(arrayAbbr !=null){
-        article = article.replace(abbr,function(x){return '<b title ="축약을 하지 않고 줄임말을 사용하면 안 됩니다." style ="background-color:blue; text-decoration: underline">'+x+'</b>';});
-        for(var x in arrayAbbr) {
-            errorConsole += (arrayAbbr[x]+' : 축약을 하지 않고 줄임말을 사용하면 안 됩니다. 원래 명칭은 \''+thisWord[0]+'\'입니다.<br>');
-        }
+        updateOutput(article,abbr,"축약을 하지 않고 줄임말을 사용하면 안 됩니다. 원래 명칭은 \'"+thisWord[0]+"\'입니다.","blue");
       }
     }
-  //  // 메시지
-  //   var errMsg = thisWord[1];
-  //   //정규표현식으로 검색한 결과 행렬
-  //   searchArray = article.match(wrdSrch);
-  //   //결과출력에서 붉은줄로 표현
-  //   article = article.replace(wrdSrch,'<b title ="'+errMsg+'" style ="background-color:/*#F26968*/red; text-decoration: underline">'+thisWord[0]+'</b>');
-  //   //메시지 출력
-  //   for(var x in searchArray) {
-  //     if(errMsg != undefined)
-  //       errorConsole += (thisWord[0]+" : " +errMsg+ '<br>');
-  //   }
-  // }
-  // article = article.replace(/(\n|\r\n)/g, '<br>');
   }
 }
