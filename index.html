@@ -4,7 +4,9 @@
 	<meta charset="utf-8">
 	<title>표현칼 자동화 시스템</title>
 	<script src="dict1.js"></script>
+	<script src="dict2.js"></script>
 	<script src="func1.js"></script>
+	<script src="func2.js"></script>
 	<script src="func3.js"></script>
 	<script src="article.js"></script>
 	<style>
@@ -32,22 +34,34 @@
 	</style>
 </head>
 <body>
-	<h1><a href="" style=" color:/*#EDFAFD*/white;text-decoration:none">karl on web 0.1</a></h1>
+	<h1><a href="" style=" color:/*#EDFAFD*/white;text-decoration:none">karl on web 0.3</a></h1>
 	<div style="text-align:right"><a href="versionRecords.html">버전기록</a></div>
 	<div>
 			<fieldset>
 				<legend>맞춤법 검사기를 돌린 뒤, 여기에 기사를 붙여넣으세요</legend>
-        <textarea id="article" rows="25" cols="100">예시)지난달 23일 인문대 8동에서 2017 하반기 임시 전체학생대표자회의(전학대회)가 열리었다.  이번 전학대회에서는 지난 전학대회에서 논의되지 못했던 예결산안과 시흥캠퍼스 문제 대응 방향 등이 논의되었다.(‘대학신문’ 2017년 12월 4일자)
- 사회과학대학 A 학생회장(정치학과가운뎃점15)은 "이번 전학대회에서 결정된 시흥캠퍼스 문제 대응 기조에 동의하기 어렵다"고 밝혔다.
+        <textarea id="article" rows="25" cols="100">예시1)
+지난달 23일 인문대 8동에서 2017 하반기 임시 전체학생대표자회의(전학대회)가 열리었다.  이번 전학대회에서는 지난 전학대회에서 논의되지 못했던 예결산안과 시흥캠퍼스 문제 대응 방향 등이 논의되었다.(‘대학신문’ 2017년 12월 4일자)
+사회과학대학 A 학생회장(정치학과가운뎃점15)은 "이번 전학대회에서 결정된 시흥캠퍼스 문제 대응 기조에 동의하기 어렵다"고 밝혔다.
 
-지난달 23일(화) 학내 한 카페에서 정년퇴임을 앞둔 C 교수를 만났다. 2일(화)부터 운동을 시작했다는 그의 표정엔 여유가 있어 보였다.</textarea>
+예시2)
+시흥캠퍼스(시흥캠) 시흥캠 시흥캠(O)
+총학생회 총학생회 총학생회장 총학생회 총학생회(O)
+전체학생총회 총회 전체학생총회 총회 총회 (X)
+단과대운영위원회(단운위) 단과대운영위원회(단운위) 단운위 단운위 (X)
+총추위 총장추천위원회(총추위) 총추위 (X)
+생활협동조합(생협) 생활협동조합 (X)
+
+예시3)
+지난달 23일(화) 학내 한 카페에서 정년퇴임을 앞둔 C 교수를 만났다. 2일(화)부터 운동을 시작했다는 그의 표정엔 여유가 있어 보였다. 그가 새로운 분야로 뛰어들기로 결심한 것은 재작년 8월 20일(화)이었다.
+</textarea>
         <br>
 				<br>
-				<div id = "hltd" style ="width:700px"></div>
+				<div id = "output" style ="width:700px"></div>
 				<br>
 				<button type="button" onclick="karl()">칼 보기</button>
+				<button type="button" onclick="deleteText()">지우기</button>
 			</fieldset>
-    <p id="output">
+    <p id="errorConsole">
 			<b>
 				페이지 우측 하단 메신저를 통해 추가해야 할 단어, 기능 개선점 등을 건의해주세요.<br>
 				욕설, 비방, 도배, 사이트와 관련없는 채팅은 고지 없이 자동으로 고발조치됩니다.

@@ -6,6 +6,22 @@
     return article;
   }
 
+  //금칙어를 정규표현식으로 바꿉니다
+    function wordToRegExp(str){
+      //금칙어에서 특수문자 이스케이프
+      var strEscaped = str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      //금칙어를 정규표현식으로
+      var strRegExp = new RegExp(strEscaped,"g");
+      return strRegExp;
+    }
+
+  //금칙어와 에러메시지를 나눕니다
+    function getWordFromArrayLine(wordArrayLine){
+      //탭을 기준으로 금칙어와 에러메시지 나누기
+      var thisWord =wordArrayLine.split('\t');
+      return thisWord;
+    }
+
   //에러화면을 출력할 변수
   var errorConsole;
   //기사 결과를 출력할 변수
@@ -16,10 +32,15 @@
     //변수 초기화
   	article = '<b title="틀린 이유가 나옵니다.">틀린 부분 위에 마우스를 올려놓으세요.<br><br></b>'+getArticle();
     errorConsole='';
-    //기능 1//
     func1();
-
+    func2();
     func3();
-    document.getElementById("hltd").innerHTML = article;
-		document.getElementById("output").innerHTML = errorConsole;
+    document.getElementById("output").innerHTML = article;
+		document.getElementById("errorConsole").innerHTML = errorConsole;
 	}
+  //글상자 내용을 지웁니다
+  function deleteText(){
+    document.getElementById("article").value ='';
+    document.getElementById("output").innerHTML = '';
+		document.getElementById("errorConsole").innerHTML = '<b>페이지 우측 하단 메신저를 통해 추가해야 할 단어, 기능 개선점 등을 건의해주세요.<br>욕설, 비방, 도배, 사이트와 관련없는 채팅은 고지 없이 자동으로 고발조치됩니다.</b>';
+  }
