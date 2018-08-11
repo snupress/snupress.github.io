@@ -25,7 +25,6 @@ function func2(){
     }
     abbrStr+="(?=[^\\)])";
     var abbr = new RegExp(abbrStr,"g");
-    console.log(abbr);
     var arrayAbbr = article.match(abbr);
     if(arrayAbbrFst != null){
       if(arrayAbbrFst.length >1){
@@ -63,7 +62,6 @@ function func2(){
     //축약을 하지 않은 경우
     else{
       if(arrayAbbr !=null){
-        alert(arrayAbbr);
         article = article.replace(abbr,function(x){return '<b title ="축약을 하지 않고 줄임말을 사용하면 안 됩니다." style ="background-color:blue; text-decoration: underline">'+x+'</b>';});
         for(var x in arrayAbbr) {
             errorConsole += (arrayAbbr[x]+' : 축약을 하지 않고 줄임말을 사용하면 안 됩니다. 원래 명칭은 \''+thisWord[0]+'\'입니다.<br>');
