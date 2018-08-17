@@ -7,7 +7,6 @@
       var thisWord = getWordFromArrayLine(wordArray[inx]);
       //검색할 금칙어를 정규표현식으로 고치기
       var wrdSrch = new RegExp(thisWord[0],"g");
-      console.log(wrdSrch)
       //메시지
       var errMsg = thisWord[1];
       //정규표현식으로 검색한 결과 행렬

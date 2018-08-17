@@ -1,3 +1,4 @@
+
   //기사를 가져온 뒤 겹따옴표와 띄어쓰기를 변환합니다.
   function getArticle(){
     var article = document.getElementById("article").value;
@@ -50,6 +51,14 @@
   //글상자 내용을 지웁니다
   function deleteText(){
     document.getElementById("article").value ='';
-    document.getElementById("output").innerHTML = '';
-		document.getElementById("errorConsole").innerHTML = '<b>페이지 우측 하단 메신저를 통해 추가해야 할 단어, 기능 개선점 등을 건의해주세요.<br>욕설, 비방, 도배, 사이트와 관련없는 채팅은 고지 없이 자동으로 고발조치됩니다.</b>';
+    document.getElementById("output").innerHTML = outputDft;
+		document.getElementById("errorConsole").innerHTML = errorConsoleDft;
   }
+
+  function fillExmp(){
+    document.getElementById("article").value = articleDft;
+    document.getElementById("output").innerHTML = outputDft
+    document.getElementById("errorConsole").innerHTML = errorConsoleDft;
+  }
+  //디폴트
+  //deleteText();

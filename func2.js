@@ -19,7 +19,9 @@ function func2(){
 
     var abbrStr = thisWord[1];
     //축약어가 원래 단어에 포함되고, 원래 단어 속 축약어 앞에 글자가 있는 경우
+
     if(!!splittedByAbbr[0]&&(splittedByAbbr[1]!=undefined)){
+      //   중요! IE, MS EDGE, 안드로이드 인터넷에서 전방탐색이 지원되지 않음
       abbrStr = "(?<!"+splittedByAbbr[0]+")"+abbrStr;
     }
     //축약어가 원래 단어에 포함되고, 원래 단어 속 축약어 뒤에 글자가 있는 경우
@@ -29,6 +31,7 @@ function func2(){
     //뒤에 괄호가 오는 경우
     abbrStr+="(?=[^\\)])";
 
+    console.log(abbrStr);
     var abbr = new RegExp(abbrStr,"g");
     var arrayAbbr = article.match(abbr);
     if(arrayAbbrFst != null){
