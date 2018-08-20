@@ -1,4 +1,6 @@
 
+  var errCnt=0;
+
   //기사를 가져온 뒤 겹따옴표와 띄어쓰기를 변환합니다.
   function getArticle(){
     var article = document.getElementById("article").value;
@@ -10,7 +12,25 @@
 //결과값과 에러 콘솔을 업데이트합니다.
   function updateOutput(text,searchWord,msg,color){
     var searchArray = text.match(searchWord);
+    if(searchArray!=null)
+      errCnt++;
     article = text.replace(searchWord,function(x){return '<b title =\"'+msg+'\" style ="background-color:'+color+'; text-decoration: underline">'+x+'</b>';});
+    for(var x in searchArray) {
+        errorConsole += (searchArray[x]+' : '+msg+'<br>');
+    }
+  }
+  function updateOutput2(text,searchWord,msg,color){
+    var searchArray;
+    if( searchWord[1]!=undefined && searchWord[1].length>0) searchArray = text.match2(searchWord[0],searchWord[1]);
+    else{
+      searchArray=text.match(searchWord[0]);
+    }
+    if(searchArray!=null)
+      errCnt++;
+    if(searchWord[1]!=undefined &&searchWord[1].length>0){
+      console.log(searchWord);
+      article = text.replace2(searchWord[0],function(x){return '<b title =\"'+msg+'\" style ="background-color:'+color+'; text-decoration: underline">'+x+'</b>';},searchWord[1]);
+    } else article = text.replace(searchWord[0],function(x){return '<b title =\"'+msg+'\" style ="background-color:'+color+'; text-decoration: underline">'+x+'</b>';});
     for(var x in searchArray) {
         errorConsole += (searchArray[x]+' : '+msg+'<br>');
     }
@@ -36,17 +56,36 @@
   //기사 결과를 출력할 변수
   var article;
 
+
+  function LbRegExp(str){
+    var wrdSrch2 =[];
+    var lbEnd = str.indexOf(")");
+    if(str.indexOf("?<")!=-1){
+    wrdSrch2[0] = new RegExp(str.substring(lbEnd+1,str.length),"g");
+      wrdSrch2[1] = str.substring(0,lbEnd+1);
+    }
+    else{
+      wrdSrch2[0] = new RegExp(str,"g");
+      wrdSrch2[1]= "";
+    }
+    return wrdSrch2;
+  }
+
+
   //칼을 봅니다
   function karl(){
     //변수 초기화
-  	article = '<b title="틀린 이유가 나옵니다.">틀린 부분 위에 마우스를 올려놓으세요.<br><br></b>'+getArticle();
+  	article = getArticle();
     errorConsole='';
     article = article.replace(/(\n|\r\n)/g, '<br>');
     func1();
     func2();
     func3();
+    func4();
+    article = '<b title="틀린 이유가 나옵니다.">틀린 부분 위에 마우스를 올려놓으세요.<br></b><b>발견된 오류: '+errCnt+'개<br><br>'+ article;
     document.getElementById("output").innerHTML = article;
 		document.getElementById("errorConsole").innerHTML = errorConsole;
+    errCnt =0;
 	}
   //글상자 내용을 지웁니다
   function deleteText(){
