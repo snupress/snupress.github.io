@@ -28,7 +28,6 @@
     if(searchArray!=null)
       errCnt++;
     if(searchWord[1]!=undefined &&searchWord[1].length>0){
-      console.log(searchWord);
       article = text.replace2(searchWord[0],function(x){return '<b title =\"'+msg+'\" style ="background-color:'+color+'; text-decoration: underline">'+x+'</b>';},searchWord[1]);
     } else article = text.replace(searchWord[0],function(x){return '<b title =\"'+msg+'\" style ="background-color:'+color+'; text-decoration: underline">'+x+'</b>';});
     for(var x in searchArray) {
@@ -71,7 +70,6 @@
     return wrdSrch2;
   }
 
-
   //칼을 봅니다
   function karl(){
     //변수 초기화
@@ -81,7 +79,8 @@
     func1();
     func2();
     func3();
-    func4();
+    func4(dict4,0);
+    func4(dict4_1,1)
     article = '<b title="틀린 이유가 나옵니다.">틀린 부분 위에 마우스를 올려놓으세요.<br></b><b>발견된 오류: '+errCnt+'개<br><br>'+ article;
     document.getElementById("output").innerHTML = article;
 		document.getElementById("errorConsole").innerHTML = errorConsole;

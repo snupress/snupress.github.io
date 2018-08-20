@@ -59,7 +59,6 @@ function func2(){
         var tarrayAbbr = article.match(tabbr);
         if(tarrayAbbr.index<tarrayAbbrFst.index){
           var errorText = article.split(arrayAbbrFst[0]);
-          errorArrayAbbr = errorText[0].match(abbr);
           updateOutput2(errorText[0],abbr,"축약을 하기 전에 줄임말을 사용하면 안 됩니다.","blue");
           article += (arrayAbbrFst[0] + errorText[1]);
           updateOutput(article,abbrFst,"축약을 하기 전에 줄임말을 사용하면 안 됩니다.","blue");
