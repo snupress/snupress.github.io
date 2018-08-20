@@ -1,10 +1,9 @@
 function func4(dictGiven,flag){
   //탭 두번을 기준으로 각 건물들을 나눈 행렬
-  var bldArray = dictGiven.split('    ');
 
-  for(var inx in bldArray){
+  for(var inx in dictGiven){
     //금칙어 행렬에서 건물 번호와 건물 이름 행렬로 받아오기
-    var thisBld = getWordFromArrayLine(bldArray[inx]);
+    var thisBld = dictGiven[inx];
 
     var bldInf = new RegExp(thisBld[1]+"\\("+thisBld[0]+"\\)","g");
     var bldInfArray = article.match(bldInf);

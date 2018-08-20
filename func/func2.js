@@ -1,10 +1,9 @@
 
 function func2(){
-  var wordArray = dict2.split('    ');
 
-  for(var inx in wordArray){
+  for(var inx in dict2){
     //금칙어 행렬에서 원래 단어와 축약어 행렬로 받아오기
-    var thisWord = getWordFromArrayLine(wordArray[inx]);
+    var thisWord = dict2[inx];
     //원래 단어(축약어)를 정규표현식으로
     //따옴표가 붙어도 인정
 
