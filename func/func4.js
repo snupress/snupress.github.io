@@ -19,7 +19,7 @@ function func4(dictGiven,flag){
         var tonlyBldNo = new RegExp("[^0-9]"+thisBld[0]);
         var tonlyBldNmArray = article.match(tonlyBldNm);
         var tonlyBldNoArray = article.match(tonlyBldNo);
-        if(flag==0){
+        if(flag!=1){
           if(tonlyBldNmArray.index<tBldInfArray.index){
             var errorText = article.split(tBldInfArray[0]);
             var onlyBldNm = new RegExp(thisBld[1],"g");
@@ -39,7 +39,7 @@ function func4(dictGiven,flag){
     }
     //건물 이름(건물 번호를 한 번도 표기 안 함)
     else{
-      if(flag==0){
+      if(flag!=1){
         var onlyBldNm = new RegExp(thisBld[1],"g");
         updateOutput(article,onlyBldNm,thisBld[1]+"의 건물 번호는 "+thisBld[0].split("동")[0]+"입니다.","purple");
       }

@@ -80,7 +80,7 @@
     func2();
     func3();
     func4(dict4,0);
-    func4(dict4_1,1)
+    func4(dict4_1,1);
     article = '<b title="틀린 이유가 나옵니다.">틀린 부분 위에 마우스를 올려놓으세요.<br></b><b>발견된 오류: '+errCnt+'개<br><br>'+ article;
     document.getElementById("output").innerHTML = article;
 		document.getElementById("errorConsole").innerHTML = errorConsole;
